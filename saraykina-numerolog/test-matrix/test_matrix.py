@@ -4,6 +4,7 @@ from allure import id, step, epic, feature, manual, description, title, suite, d
 from pytest import mark
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from pages import icon_vk,icon_tel,icon_inst
 
@@ -18,8 +19,10 @@ class TestMatrix:
     @description('Проверить возможность перехода по иконке VK')
     @label('priority', 'низкий')
     def test_matrix_step_in_vk(self):
+        options = Options()
         with step('Перейти на страницу'):
-            driver = webdriver.Chrome()
+            options.add_argument('--headless')
+            driver = webdriver.Chrome(options=options)
             driver.get('https://www.saraykina-numerolog.ru/index.html')
         with step('Проверить переход на страницу Vk через иконку VK'):
             with step('Нажать на иконку "VK" и перейти на страницу VK'):
